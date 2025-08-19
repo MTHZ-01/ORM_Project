@@ -107,6 +107,9 @@ class Model(QueryableMixin, metaclass=ModelMeta):
 
     def _check_unique_constraints(self, current_pk_value):
         """Check if any unique constraints would be violated by saving this object."""
+        # Get the primary key field for the current model
+        pk_field = self.get_primary_key_field()
+        
         for name, field in self._fields.items():
             if field.unique:
                 value = getattr(self, name)
@@ -130,6 +133,7 @@ class Model(QueryableMixin, metaclass=ModelMeta):
                         
                     # If we found another object with the same value, raise error
                     raise ValueError(f"Unique constraint violation: {name}='{value}' already exists")
+
     def delete(self):
         """Delete this model instance from the database."""
         pk_field = self.get_primary_key_field()
