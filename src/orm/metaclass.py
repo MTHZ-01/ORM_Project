@@ -20,7 +20,7 @@ class ModelMeta(type):
             id_field = IntegerField()
             id_field.name = "id"
             id_field.primary_key = True
-            id_field.auto_increment = True  # You can add this attribute in your Field class
+            id_field.auto_increment = True  
             fields["id"] = id_field
 
         # Validate only one primary key
