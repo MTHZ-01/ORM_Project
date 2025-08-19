@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORM Project Documentation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        pre {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ORM Project Documentation</h1>
+
+    <div class="card section">
+        <h2>Overview</h2>
+        <p>A Python Object-Relational Mapping (ORM) library similar to Django ORM that provides a high-level interface for database operations.</p>
+    </div>
+
+    <div class="card section">
+        <h2>Key Features</h2>
+
+        <h3>1. Model Definition</h3>
+        <pre><code>class User(Model):
+    id = IntegerField(primary_key=True)
+    name = StringField(max_length=100)
+    email = StringField(max_length=100, unique=True)
+    age = IntegerField(default=18)
+</code></pre>
+
+        <h3>2. Field Types</h3>
+        <ul>
+            <li><strong>IntegerField</strong>: Integer values</li>
+            <li><strong>StringField</strong>: String values with configurable length</li>
+            <li><strong>FloatField</strong>: Floating-point numbers</li>
+            <li><strong>BooleanField</strong>: True/False values</li>
+            <li><strong>DateTimeField</strong>: Date and time values</li>
+            <li><strong>ForeignKey</strong>: Relationship fields between models</li>
+        </ul>
+
+        <h3>3. Database Operations</h3>
+        <ul>
+            <li><strong>Create</strong>: <code>user = User(name="John"); user.save()</code></li>
+            <li><strong>Read</strong>: <code>User.objects().all()</code>, <code>User.objects().get(id=1)</code></li>
+            <li><strong>Update</strong>: <code>user.name = "John Doe"; user.save()</code></li>
+            <li><strong>Delete</strong>: <code>user.delete()</code></li>
+        </ul>
+
+        <h3>4. Querying</h3>
+        <pre><code># Get all users
+users = User.objects().all()
+
+# Filter users
+admins = User.objects().filter(role="admin")
+
+# Get single object
+user = User.objects().get(email="john@example.com")
+</code></pre>
+
+        <h3>5. Relationships</h3>
+        <pre><code>class Post(Model):
+    title = StringField(max_length=200)
+    author = ForeignKey(User)  # Many-to-one relationship
+</code></pre>
+    </div>
+
+    <div class="card section">
+        <h2>Installation & Setup</h2>
+        <ol>
+            <li>Install dependencies: <code>pip install -r requirements.txt</code></li>
+            <li>Import and use models in your code</li>
+        </ol>
+    </div>
+
+    <div class="card section">
+        <h2>Running Tests</h2>
+        <pre><code># Run all tests with coverage
+coverage run -m unittest discover
+
+# View coverage report
+coverage report
+
+# Generate HTML coverage report
+coverage html
+</code></pre>
+    </div>
+
+    <div class="card section">
+        <h2>Example Usage</h2>
+        <pre><code># Create a new user
+user = User(name="Alice", email="alice@example.com")
+user.save()
+
+# Query users
+users = User.objects().filter(name="Alice")
+for user in users:
+    print(user.name, user.email)
+
+# Update a user
+user.name = "Alice Smith"
+user.save()
+
+# Delete a user
+user.delete()
+</code></pre>
+    </div>
+
+    <div class="card section">
+        <h2>Project Structure</h2>
+        <pre><code>orm-project/
+├── src/
+│   └── orm/
+│       ├── __init__.py
+│       ├── connection.py    # Database connection
+│       ├── fields.py        # Field definitions
+│       ├── model.py         # Model base class
+│       ├── query.py         # QuerySet implementation
+│       └── metaclass.py     # Model metaclass
+├── tests/                   # Unit tests
+├── examples/                # Usage examples
+└── requirements.txt         # Dependencies
+</code></pre>
+    </div>
+
+</body>
+</html>
